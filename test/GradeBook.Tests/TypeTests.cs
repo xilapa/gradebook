@@ -35,6 +35,24 @@ namespace GradeBook.Tests
         }
 
         [Fact]
+        public void ValueTypeAlsoPassByValue()
+        {
+            var x = GetInt();
+            SetInt(x);
+            Assert.Equal(5,x);
+        }
+
+        private void SetInt(int x)
+        {
+            x = 10;
+        }
+
+        private int GetInt()
+        {
+            return 5;
+        }
+
+        [Fact]
         public void SetNameByReference()
         {
             var book1 = GetBook("Book 1");
