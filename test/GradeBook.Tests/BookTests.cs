@@ -24,6 +24,16 @@ namespace GradeBook.Tests
         }
 
 
+        [Fact]
+        public void GradeBetween0and100()
+        {
+            var book = new Book("test");
+            book.AddGrade(105.0);
+            book.AddGrade(-5.0);
+            book.AddGrade(0);
+            var result = book.GetStatistics();
+            Assert.Equal(0.0, result.Average, 1);
+        }
         public void CountInstancesTest()
         {
             // arrange
