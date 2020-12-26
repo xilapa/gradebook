@@ -1,10 +1,22 @@
-using System;
 using Xunit;
 
 namespace GradeBook.Tests
 {
     public class TypeTests
     {
+        [Fact]
+        public void StringsBehaveLikeValueTypes()
+        {
+            var name = "Dirceu";
+            ToUpperCase(name);
+            Assert.Equal("Dirceu",name);
+        }
+
+        private void ToUpperCase(string parameter)
+        {
+            parameter.ToUpper();
+        }
+
         [Fact]
         public void CSharpCanPassByRef()
         // mantém um link entre a variável e o parâmetro
