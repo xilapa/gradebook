@@ -20,6 +20,7 @@ namespace GradeBook.Tests
             Assert.Equal(12.0, result.Low, 1);
             Assert.Equal(14.0, result.High, 1);
             Assert.Equal(13.1, result.Average, 1);
+            Assert.Equal('F',result.Letter);
             // terceiro argumento é a precisão de casas decimais
         }
 
