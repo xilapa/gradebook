@@ -10,7 +10,6 @@ namespace GradeBook
             grades = new List<double>();
             this.Name = Name;
             instanceCount += 1;
-            
         }
 
         public static int CountInstances()
@@ -31,45 +30,53 @@ namespace GradeBook
             }
             else
             {
-                Console.WriteLine("Grade should be between 0 and 100");
+                throw new ArgumentException($"Invalid {nameof(grade)}, it should be between 0 and 100");
             }
-            
         }   
 
         public Statistics GetStatistics()
         {
             Statistics result = new Statistics();
-            double sum = 0;
-            foreach (var grade in grades)
-            {
-                result.Low = Math.Min(grade,result.Low);
-                result.High = Math.Max(grade, result.High);
-                sum += grade;
-            }  
-            result.Average = sum / grades.Count;
+            if (grades.Count >= 1)
+            {                
+                double sum = 0;
+                foreach (var grade in grades)
+                {
+                    result.Low = Math.Min(grade,result.Low);
+                    result.High = Math.Max(grade, result.High);
+                    sum += grade;
+                }  
+                result.Average = sum / grades.Count;
 
-            switch (result.Average)
-            {
-                case var avg when avg >= 90.0:
-                    result.Letter = 'A';
-                    break;
-                case var avg when avg >= 80.0:
-                    result.Letter = 'B';
-                    break;
-                case var avg when avg >= 70.0:
-                    result.Letter = 'C';
-                    break;
-                case var avg when avg >= 60.0:
-                    result.Letter = 'D';
-                    break;
-                case var avg when avg >= 50.0:
-                    result.Letter = 'E';
-                    break;
-                default:
-                    result.Letter = 'F';
-                    break;
+                switch (result.Average)
+                {
+                    case var avg when avg >= 90.0:
+                        result.Letter = 'A';
+                        break;
+                    case var avg when avg >= 80.0:
+                        result.Letter = 'B';
+                        break;
+                    case var avg when avg >= 70.0:
+                        result.Letter = 'C';
+                        break;
+                    case var avg when avg >= 60.0:
+                        result.Letter = 'D';
+                        break;
+                    case var avg when avg >= 50.0:
+                        result.Letter = 'E';
+                        break;
+                    default:
+                        result.Letter = 'F';
+                        break;
+                }
+                return result;
             }
-            return result;
+            else
+            {
+                result.Low = result.High = result.Average = 0;
+                result.Letter = '-';
+                return result;
+            }
         }
 
         private List<double> grades;
