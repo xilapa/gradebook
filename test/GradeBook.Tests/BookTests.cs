@@ -8,7 +8,7 @@ namespace GradeBook.Tests
         public void GetStatisticsTest()
         {
             // arrange
-            var book = new Book("");
+            var book = new Book("new book");
             book.AddGrade(12.0);
             book.AddGrade(14.0);
             book.AddGrade(13.3);

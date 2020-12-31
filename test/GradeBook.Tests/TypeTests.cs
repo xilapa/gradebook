@@ -1,9 +1,45 @@
+using System;
 using Xunit;
 
 namespace GradeBook.Tests
 {
     public class TypeTests
     {
+        private int count = 0;
+        public delegate string WriteLogDelegate(string logMessage);
+
+        [Fact]
+        public void WriteLogDelegateCanPointToManyMethods()
+        {
+            WriteLogDelegate logger = writeLogAndReturnMessage;
+            logger += ReturnMessage;
+            logger("message");
+            Assert.Equal(2, count);
+
+        }
+
+        private string ReturnMessage(string message)
+        {
+            count ++;
+            return message;
+        }
+
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            var logger = new WriteLogDelegate(writeLogAndReturnMessage);
+            var result = logger("message");
+            Assert.Equal("message",result);
+
+        }
+
+        private string writeLogAndReturnMessage(string message)
+        {
+            count ++;
+            Console.WriteLine(message);
+            return message;
+        }
+
         [Fact]
         public void StringsBehaveLikeValueTypes()
         {
@@ -33,9 +69,9 @@ namespace GradeBook.Tests
 
         [Fact]
         public void CSharpPassIsByValue()
-        // no método GetBookSetName a referência de book foi trocada para a valor de outro ponteiro
-        // por isso não há alteração do valor em book1
         {
+            // no método GetBookSetName a referência de book foi trocada para a valor de outro ponteiro
+            // por isso não há alteração do valor em book1
             var book1 = GetBook("Book 1");
             GetBookSetName(book1,"New name");
             Assert.Equal("Book 1", book1.Name);

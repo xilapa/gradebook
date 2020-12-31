@@ -4,11 +4,12 @@ namespace GradeBook
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("What's the student name?");
             var inputName = Console.ReadLine();
             var book = new Book(inputName);
+            book.GradeAdded += OnGradeAdded;
             
             
             string inputGrade;
@@ -34,12 +35,15 @@ namespace GradeBook
                     Console.WriteLine(e.Message);
                 }
             }while (inputGrade != "q");
-
-
             
             var stats = book.GetStatistics();
-
+            
             Console.WriteLine($"{book.GetBookName()}'s book statistics:\n\tMinimum grade: {stats.Low:N2}\n\tMaximum grade: {stats.High:N2}\n\tAverage grade: {stats.Average:N2}\n\tLetter grade: {stats.Letter}");
+        }
+    
+        static void OnGradeAdded(object sender, EventArgs args)
+        {
+            Console.WriteLine("Grade Added");
         }
     }
 }
