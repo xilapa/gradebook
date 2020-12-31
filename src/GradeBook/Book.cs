@@ -5,9 +5,9 @@ namespace GradeBook
 {
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-    public class Book
+    public class Book : NamedObject
     {
-        public Book(string Name)
+        public Book(string Name) : base(Name)
         {
             grades = new List<double>();
             this.Name = Name;
@@ -87,27 +87,8 @@ namespace GradeBook
             }
         }
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    name = value;
-                }
-                else
-                {
-                    throw new ArgumentException($"{nameof(Name)} is invalid, it can't be null or empty");
-                }
-            }
-        }
-
         private List<double> grades;
-        private string name;
+    
         private static int instanceCount = 0;
     }
 }

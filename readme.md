@@ -8,7 +8,9 @@ A aplicação em si calcula a média, a maior e a menor nota de um certo aluno.
 
 - Boas práticas na criação de classes e métodos
 - Desenvolvimento focado em testes
-- Organização de um projeto
+- Organização de projeto
 - Fundamentos da linguagem C#
+- Fundamentos de POO
+- Delegates e Events
 
 
