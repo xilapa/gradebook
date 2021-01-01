@@ -8,7 +8,7 @@ namespace GradeBook.Tests
         public void GetStatisticsTest()
         {
             // arrange
-            var book = new Book("new book");
+            var book = new InMemoryBook("new book");
             book.AddGrade(12.0);
             book.AddGrade(14.0);
             book.AddGrade(13.3);
@@ -28,7 +28,7 @@ namespace GradeBook.Tests
         [Fact]
         public void GradeBetween0and100()
         {
-            var book = new Book("test");
+            var book = new InMemoryBook("test");
             book.AddGrade(105.0);
             book.AddGrade(-5.0);
             book.AddGrade(0);
@@ -38,11 +38,11 @@ namespace GradeBook.Tests
         public void CountInstancesTest()
         {
             // arrange
-            var book1 = new Book("book");
-            var book2 = new Book("book");
+            var book1 = new InMemoryBook("book");
+            var book2 = new InMemoryBook("book");
 
             // act
-            var result = Book.CountInstances();
+            var result = InMemoryBook.CountInstances();
 
             // assert
             Assert.NotEqual(book1,book2);

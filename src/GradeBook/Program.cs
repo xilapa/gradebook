@@ -1,4 +1,6 @@
 ﻿using System;
+// delegate moved to a file
+// criar abstract Book e Book atual vira InMemoryBook
 
 namespace GradeBook
 {
@@ -8,12 +10,21 @@ namespace GradeBook
         {
             Console.WriteLine("What's the student name?");
             var inputName = Console.ReadLine();
-            var book = new Book(inputName);
+            var book = new InMemoryBook(inputName);
             book.GradeAdded += OnGradeAdded;
-            
-            
+
+
+            EnterGrades(book); 
+
+            var stats = book.GetStatistics();
+
+            Console.WriteLine($"{book.GetBookName()}'s book statistics:\n\tMinimum grade: {stats.Low:N2}\n\tMaximum grade: {stats.High:N2}\n\tAverage grade: {stats.Average:N2}\n\tLetter grade: {stats.Letter}");
+        }
+
+        private static void EnterGrades(IBook book)
+        {
             string inputGrade;
-            do 
+            do
             {
                 Console.WriteLine("Type a grade or press \"Q\" to quit and show statistics");
                 inputGrade = Console.ReadLine().ToLower();
@@ -34,13 +45,9 @@ namespace GradeBook
                 {
                     Console.WriteLine(e.Message);
                 }
-            }while (inputGrade != "q");
-            
-            var stats = book.GetStatistics();
-            
-            Console.WriteLine($"{book.GetBookName()}'s book statistics:\n\tMinimum grade: {stats.Low:N2}\n\tMaximum grade: {stats.High:N2}\n\tAverage grade: {stats.Average:N2}\n\tLetter grade: {stats.Letter}");
+            } while (inputGrade != "q");
         }
-    
+
         static void OnGradeAdded(object sender, EventArgs args)
         {
             Console.WriteLine("Grade Added");
