@@ -42,47 +42,12 @@ namespace GradeBook
 
         public override Statistics GetStatistics()
         {
-            Statistics result = new Statistics();
-            if (grades.Count >= 1)
-            {                
-                double sum = 0;
-                foreach (var grade in grades)
-                {
-                    result.Low = Math.Min(grade,result.Low);
-                    result.High = Math.Max(grade, result.High);
-                    sum += grade;
-                }  
-                result.Average = sum / grades.Count;
-
-                switch (result.Average)
-                {
-                    case var avg when avg >= 90.0:
-                        result.Letter = 'A';
-                        break;
-                    case var avg when avg >= 80.0:
-                        result.Letter = 'B';
-                        break;
-                    case var avg when avg >= 70.0:
-                        result.Letter = 'C';
-                        break;
-                    case var avg when avg >= 60.0:
-                        result.Letter = 'D';
-                        break;
-                    case var avg when avg >= 50.0:
-                        result.Letter = 'E';
-                        break;
-                    default:
-                        result.Letter = 'F';
-                        break;
-                }
-                return result;
-            }
-            else
+            var result = new Statistics();
+            foreach (var grade in grades)
             {
-                result.Low = result.High = result.Average = 0;
-                result.Letter = '-';
-                return result;
+                result.Add(grade);
             }
+            return result;
         }
 
         private List<double> grades;
