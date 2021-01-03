@@ -35,20 +35,5 @@ namespace GradeBook.Tests
             var result = book.GetStatistics();
             Assert.Equal(0.0, result.Average, 1);
         }
-        public void CountInstancesTest()
-        {
-            // arrange
-            var book1 = new InMemoryBook("book");
-            var book2 = new InMemoryBook("book");
-
-            // act
-            var result = InMemoryBook.CountInstances();
-
-            // assert
-            Assert.NotEqual(book1,book2);
-            Assert.Equal(3,result);
-            // conta a instância do método acima
-
-        }
     }
 }

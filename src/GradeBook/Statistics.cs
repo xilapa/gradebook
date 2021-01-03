@@ -8,13 +8,7 @@ namespace GradeBook
         {
             get
             {
-                if (Count > 0)
-                {
-                     return low;
-                }
-                   
-                else
-                    return 0;
+                return low;
             }
             private set 
             {
@@ -43,7 +37,8 @@ namespace GradeBook
                 if (Count >= 1)
                     return sum / Count;
                 else
-                    return 0;
+                    throw new DivideByZeroException($"{nameof(Count)} is zero");
+                    // tratar este erro
             }
         }
         public char Letter

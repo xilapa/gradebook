@@ -1,18 +1,15 @@
 ﻿using System;
-// delegate moved to a file
-// criar abstract Book e Book atual vira InMemoryBook
 
 namespace GradeBook
 {
     class Program
     {
         static void Main()
-        {
+        {   // reescrever
             Console.WriteLine("What's the student name?");
             var inputName = Console.ReadLine();
-            var book = new DiskBook(inputName);
+            var book = new InMemoryBook(inputName);
             book.GradeAdded += OnGradeAdded;
-
 
             EnterGrades(book); 
 

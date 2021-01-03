@@ -7,28 +7,7 @@ namespace GradeBook
     {
         public DiskBook(string name) : base(name)
         {
-        }
-
-        public override event GradeAddedDelegate GradeAdded;
-
-        public override void AddGrade(double grade)
-        {           
-            if (grade >= 0 && grade <= 100)
-            {
-                using(var file = File.AppendText($"{Name}.txt"))
-                {
-                    file.WriteLine(grade);
-                }
-                if (GradeAdded != null)
-                {
-                    GradeAdded(this, new EventArgs());
-                }
-            }
-            else
-            {
-                throw new ArgumentException($"Invalid {nameof(grade)}, it should be between 0 and 100");
-            }
-
+            addGradeMethod = addGradeInDisk;
         }
 
         public override Statistics GetStatistics()
@@ -47,7 +26,7 @@ namespace GradeBook
                     }
                     catch(FormatException)
                     {
-                        
+                       // blank line in the file 
                     }
 
                     line = file.ReadLine();
@@ -55,6 +34,14 @@ namespace GradeBook
             }
             
             return result;
+        }
+
+        private void addGradeInDisk(double grade)
+        {
+            using(var file = File.AppendText($"{Name}.txt"))
+            {
+                file.WriteLine(grade);
+            }
         }
     }
 }
